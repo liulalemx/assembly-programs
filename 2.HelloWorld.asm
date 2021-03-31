@@ -2,7 +2,6 @@ TITLE Hello World
 
 ;Program Desctiption: This program prints hello world
 ;Author: Liul Alemayehu
-;Creation Date: 3/28/2021
 
 .MODEL SMALL                                 ; com program, Memory Descriptor (Tiny | Small | Medium | Large)
 
