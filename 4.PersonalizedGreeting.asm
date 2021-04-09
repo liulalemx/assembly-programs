@@ -7,10 +7,10 @@ TITLE PersonalizedGreeting
 .STACK 100                                   ; stack size
 
 .DATA                                        ; Beginning of data segment where data is stored
-    msg db 13,10, "Hello! Please enter your name:$" ; Declare variable msg and assigned it a value ($ used to indicate end of string)
+    msg db "Hello! Enter your name: $"       ; Declare variable msg and assigned it a value ($ used to indicate end of string)
     newline db 13,10,'$'                     ; Creates newline
-    greeting db "Wellcome!$"                 ; Greeting message    
-    name db 80, 0, 78 DUP('$')                        ; Variable that accepts the users name
+    greeting db "Wellcome! $"                ; Greeting message    
+    namee db 80 DUP('$')                     ; Variable that accepts the users name
     
 .CODE                                        ; Beginning of code segment
 
@@ -21,29 +21,48 @@ main PROC
     
     ; Prompt
     LEA Dx,msg                               ; Loading the effective address of our msg to the Data register (Dx)
-    MOV Ah,09h                               ; Print from data 
+    MOV Ah,09                                ; Print from data 
     INT 21h                                  ; Does it!
- 
-    ; Read Message
-;    LEA Dx,name                              ; Loading the effective address of our input to the Data register (Dx)
-    MOV AH,0AH                               ; Reads an input String to the Accumilator register (high)
-    INT 21h                                  ; Does it!
-    MOV Bl,Al 
     
+    MOV Bl,0                                 ; Set value of base register to zero (used to keep track of the Si)
+    MOV Si, OFFSET namee                     ; Set the stack index value to the address of the name variable
+    
+    
+    ; Read Message
+    L1:
+    MOV AH,01                                ; Reads an input String to the Accumilator register (high)
+    INT 21h                                  ; Does it!
+        
     ; Check if ENTER is pressed
     CMP Al,13                                ; Compare the input in the Accumilator registor to the ASCII value of the ENTER key (13)
-    JE Newl                               ; Jumps to 'Display' label if the CMP is equal
- 
+    JE Enter                                 ; Jumps to 'Enter' label if the CMP is equal
+    
+    ;CMP Bl,90
+    ;JE Enter
+    
+    MOV [Si],Al                              ; Moves the character stored in Al to Si location
+    INC Si                                   ; Increases the stack index
+    INC Bl                                   ; Increases the Bl (used to keep track of the SI)
+    JMP L1                                   ; Jumps to 'L1' label (loops the entry process,wont stop unless enter is pressed)
+    
+    ; Enter Pressed
+    Enter: 
+    SUB Si,Bx                                ; Once 'Enter' is pressed, this resets the position of Si to initial position
+        
     ; Newline
-    Newl:LEA Dx,newline
+    LEA Dx,newline
     MOV Ah,09h
     INT 21h
-    JMP Display
-   
-    ; Print Greeting                                                                             
-    Display: MOV AH,09h                      ; Prints Character
-;    LEA Dx,name
-    MOV Dl,Bl                                ; Access input value from [MOV AH,01] through A1 and move to Dl
+        
+    ; Print Greeting
+    LEA Dx,greeting                          ; Loading the effective address of our greeting to the Data register (Dx)
+    MOV Ah,09                                ; Print from data 
+    INT 21h                                  ; Does it!
+    
+    ; Print Name                                                                             
+    Display: 
+    MOV AH,09h                               ; Prints Character
+    LEA Dx,Si                                ; Loads the value stored in memory location pointed to by the Si to Dx
     INT 21H                                  ; Does it!   
     
     Exit:    
