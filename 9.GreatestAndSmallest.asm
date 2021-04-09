@@ -3,7 +3,7 @@ TITLE GreatestAndSmallestNumber
 ;Program Desctiption: This program receives three numbers and outputs the smallest and the largest numbers
 ;Author: Liul Alemayehu
 
-.MODEL MEDIUM                                 ; com program, Memory Descriptor (Tiny | Small | Medium | Large)
+.MODEL MEDIUM                                ; com program, Memory Descriptor (Tiny | Small | Medium | Large)
 .STACK 100                                   ; stack size
 
 .DATA                                        ; Beginning of data segment where data is stored

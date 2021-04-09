@@ -37,9 +37,6 @@ main PROC
     CMP Al,13                                ; Compare the input in the Accumilator registor to the ASCII value of the ENTER key (13)
     JE Enter                                 ; Jumps to 'Enter' label if the CMP is equal
     
-    ;CMP Bl,90
-    ;JE Enter
-    
     MOV [Si],Al                              ; Moves the character stored in Al to Si location
     INC Si                                   ; Increases the stack index
     INC Bl                                   ; Increases the Bl (used to keep track of the SI)
