@@ -3,7 +3,7 @@ TITLE GreatestAndSmallestNumber
 ;Program Desctiption: This program receives three numbers and outputs the smallest and the largest numbers
 ;Author: Liul Alemayehu
 
-.MODEL MEDIUM                                ; com program, Memory Descriptor (Tiny | Small | Medium | Large)
+.MODEL MEDIUM                                 ; com program, Memory Descriptor (Tiny | Small | Medium | Large)
 .STACK 100                                   ; stack size
 
 .DATA                                        ; Beginning of data segment where data is stored
@@ -55,7 +55,7 @@ TITLE GreatestAndSmallestNumber
        
     ; Enter Pressed
     Enter: 
-    call largest                             ; Calls the 'largest' procedure
+    CALL largest                             ; Calls the 'largest' procedure
     
     ; Print largest number
     ; Newline
@@ -69,12 +69,12 @@ TITLE GreatestAndSmallestNumber
     INT 21h                                  ; Does it!
     
     ; Print value
-    mov Ah,02                                ; Prints to screen
-    add Bh,48                                ; Changes value in Bh to decimal
-    mov Dl,Bh                                ; Moves it to Dl
-    int 21h                                  ; Does it
+    MOV Ah,02                                ; Prints to screen
+    ADD Bh,48                                ; Changes value in Bh to decimal
+    MOV Dl,Bh                                ; Moves it to Dl
+    INT 21h                                  ; Does it
     
-    call smallest                            ; Calls the 'smallest' procedure
+    CALL smallest                            ; Calls the 'smallest' procedure
     
     ;Print smallest number 
     ; Newline
@@ -88,45 +88,45 @@ TITLE GreatestAndSmallestNumber
     INT 21h                                  ; Does it!
     
     ; Print value
-    mov Ah,02                                ; Prints to screen
-    add Bh,48                                ; Changes value in Bh to decimal
-    mov Dl,Bh                                ; Moves it to Dl
-    int 21h                                  ; Does it
-    jmp Exit
+    MOV Ah,02                                ; Prints to screen
+    ADD Bh,48                                ; Changes value in Bh to decimal
+    MOV Dl,Bh                                ; Moves it to Dl
+    INT 21h                                  ; Does it
+    JMP Exit
 
 ;...................... PROCEDURES ............................
 
     ; largest
     largest PROC
-        mov Bh,Bl
-        cmp Bh,Cl
-        jg next
-        mov Bh,Cl
+        MOV Bh,Bl
+        CMP Bh,Cl
+        JG next
+        MOV Bh,Cl
     
         next:
-        cmp Bh,Ch
-        jg next2
-        mov Bh,Ch
+        CMP Bh,Ch
+        JG next2
+        MOV Bh,Ch
     
         next2:
-        mov Al,Bh
+        MOV Al,Bh
     RET    
     largest ENDP
 
     ; smallest
     smallest PROC
-        mov Bh,Bl
-        cmp Bh,Cl
-        jl nexxt
-        mov Bh,Cl
+        MOV Bh,Bl
+        CMP Bh,Cl
+        JL nexxt
+        MOV Bh,Cl
     
         nexxt:
-        cmp Bh,Ch
-        jl nexxt2
-        mov Bh,Ch
+        CMP Bh,Ch
+        JL nexxt2
+        MOV Bh,Ch
     
         nexxt2:
-        mov Al,Bh
+        MOV Al,Bh
     RET    
     smallest ENDP
 
