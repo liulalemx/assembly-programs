@@ -6,7 +6,7 @@ Collection of Assembly programs written for the [Intel 8086](https://en.wikipedi
 
 Files labeld with a '\_' and '(Proc)' use emu8086 built-in Procedures.
 
-## Getting Started
+## Note
 
 These instructions will enable you to run the programs on your local machine.
 
