@@ -4,7 +4,7 @@ Collection of Assembly programs written for the [Intel 8086](https://en.wikipedi
 
 ## Getting Started
 
-Files labeld with a '-B' and '(Proc)' use emu8086 built-in Procedures.
+Files labeld with a '\_' and '(Proc)' use emu8086 built-in Procedures.
 
 ## Getting Started
 
